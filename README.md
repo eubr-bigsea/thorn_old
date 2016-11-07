@@ -48,5 +48,5 @@ docker run --rm \
   -e RAILS_CORS_ORIGINS=localhost:8080 \
   -p 3000:3000 \
   --volumes-from torn_mysql \
-  guimaluf/torn
+  bigsea/torn
 ```
