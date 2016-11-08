@@ -17,5 +17,5 @@ test:
 production:
   <<: *default
   database: torn_production
-  username: root
-  password:
+  username: torn
+  password: torn
