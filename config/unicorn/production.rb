@@ -1,8 +1,8 @@
-working_directory "/home/ec2-user/torn/current"
+working_directory "/home/ec2-user/thorn/current"
 worker_processes 4
-listen "/tmp/torn.sock", backlog: 64
+listen "/tmp/thorn.sock", backlog: 64
 timeout 60
-pid "/home/ec2-user/torn/shared/tmp/pids/unicorn.pid"
+pid "/home/ec2-user/thorn/shared/tmp/pids/unicorn.pid"
 stderr_path "log/unicorn.stderr.log"
 stdout_path "log/unicorn.stdout.log"
 

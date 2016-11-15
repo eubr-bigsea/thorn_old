@@ -5,9 +5,10 @@ gem 'mysql2', '>= 0.3.18', '< 0.5'
 gem 'jbuilder', '~> 2.5'
 gem 'rack-cors'
 gem 'devise'
+gem 'devise_token_auth'
 gem 'devise-i18n'
+gem 'omniauth'
 gem 'unicorn'
-gem 'jwt'
 
 group :development, :test do
   gem 'pry'

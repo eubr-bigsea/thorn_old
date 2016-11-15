@@ -8,14 +8,14 @@ default: &default
 
 development:
   <<: *default
-  database: torn_development
+  database: thorn_development
 
 test:
   <<: *default
-  database: torn_test
+  database: thorn_test
 
 production:
   <<: *default
-  database: torn_production
-  username: torn
-  password: torn
+  database: thorn_production
+  username: thorn
+  password: thorn
