@@ -1,32 +1,11 @@
-class ApplicationController < ActionController::API
-  attr_reader :current_user
+class ApplicationController < ActionController::Base
+  include DeviseTokenAuth::Concerns::SetUserByToken
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
   protected
 
-  def authenticate_request!
-    unless user_id_in_token?
-      render json: { errors: ['Not Authenticated'] }, status: :unauthorized
-      return
-    end
-    @current_user = User.find(@decoded_token['user']['id'])
-  rescue JWT::VerificationError, JWT::DecodeError, JWT::ExpiredSignature
-    render json: { errors: ['Not Authenticated'] }, status: :unauthorized
-  end
-
-
-  private
-
-  def http_token
-    @http_token ||= if request.headers['Authorization'].present?
-                      request.headers['Authorization'].split(' ').last
-                    end
-  end
-
-  def decode_token
-    @decoded_token ||= JsonWebToken.decode(@http_token)[0]
-  end
-
-  def user_id_in_token?
-    http_token && decode_token && @decoded_token['user']['id']
+  def configure_permitted_parameters
+    devise_parameter_sanitizer.permit(:sign_up, keys: [:firstname, :lastname])
+    devise_parameter_sanitizer.permit(:account_update, keys:[:password, :password_confirmation, :current_password])
   end
 end

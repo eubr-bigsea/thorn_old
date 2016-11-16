@@ -26,9 +26,9 @@ Things you may want to cover:
 ### Run with docker
 Build container
 ```
-docker build -t bigsea/torn .
+docker build -t bigsea/thorn .
 ```
-Run torn with docker
+Run thorn with docker
 
 ```
 # Initiate mysql database
@@ -36,17 +36,17 @@ docker run --rm \
   -e MYSQL_ROOT_PASSWORD="" \
   -e MYSQL_ALLOW_EMPTY_PASSWORD=yes \
   -v /var/run/mysqld/ \
-  --name torn_mysql mariadb
+  --name thorn_mysql mariadb
 
 # Setup database
 docker run --rm \
-  --volumes-from torn_mysql \
-  bigsea/torn rake db:setup
+  --volumes-from thorn_mysql \
+  bigsea/thorn rake db:setup
 
 # Run rails
 docker run --rm \
   -e RAILS_CORS_ORIGINS=localhost:8080 \
   -p 3000:3000 \
-  --volumes-from torn_mysql \
-  bigsea/torn
+  --volumes-from thorn_mysql \
+  bigsea/thorn
 ```
