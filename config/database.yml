@@ -16,6 +16,7 @@ test:
 
 production:
   <<: *default
-  database: thorn_production
+  database: thorn
   username: thorn
-  password: thorn
+  password: thornsecret
+  host: citron.ctweb.inweb.org.br
