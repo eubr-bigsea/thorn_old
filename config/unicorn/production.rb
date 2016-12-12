@@ -1,4 +1,4 @@
-app_path = File.expand_path(File.dirname(__FILE__) + '/../..')
+app_path = "/home/ubuntu/thorn"
 working_directory "#{app_path}/current"
 worker_processes 4
 listen "/tmp/thorn.sock", backlog: 64
