@@ -12,7 +12,7 @@ set :repo_url, 'git@github.com:eubr-bigsea/thorn.git'
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
 
 # Default deploy_to directory is /var/www/my_app_name
-set :deploy_to, '/home/ec2-user/thorn'
+set :deploy_to, '/home/ubuntu/thorn'
 
 # Default value for :scm is :git
 set :scm, :git

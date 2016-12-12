@@ -16,7 +16,7 @@ module LemonadeApi
     config.api_only = true
     config.middleware.insert_before 0, Rack::Cors do
       allow do
-        origins ENV['RAILS_CORS_ORIGINS'], "http://localhost:4200", /https?:\/\/localhost:(\d*)/
+        origins ENV['RAILS_CORS_ORIGINS'].to_s, "http://localhost:4200", /https?:\/\/localhost:(\d*)/
 
         resource '*',
           headers: :any,
