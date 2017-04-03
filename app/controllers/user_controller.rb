@@ -2,11 +2,11 @@ class UserController < ApplicationController
   before_action :authenticate_user!, only: [:show]
 
   def show
-    render json: User.find(params[:id])
+    render json: User.find(params[:user_id])
   end
 
   def validate_token
-    @user = User.find(params[:id])
+    @user = User.find(params[:user_id])
     if @user && @user.valid_token?(params['access-token'], params[:client])
       render json: @user
     else
