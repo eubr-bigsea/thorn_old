@@ -35,18 +35,12 @@ Run thorn with docker
 docker run --rm \
   -e MYSQL_ROOT_PASSWORD="" \
   -e MYSQL_ALLOW_EMPTY_PASSWORD=yes \
-  -v /var/run/mysqld/ \
   --name thorn_mysql mariadb
-
-# Setup database
-docker run --rm \
-  --volumes-from thorn_mysql \
-  bigsea/thorn rake db:setup
 
 # Run rails
 docker run --rm \
   -e RAILS_CORS_ORIGINS=localhost:8080 \
   -p 3000:3000 \
-  --volumes-from thorn_mysql \
+  --link thorn_mysql:mysql \
   bigsea/thorn
 ```
