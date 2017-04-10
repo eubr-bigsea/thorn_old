@@ -20,3 +20,8 @@ production:
   username: thorn
   password: thornsecret
   host: citron.ctweb.inweb.org.br
+
+docker:
+  <<: *default
+  database: thorn
+  host: mysql
