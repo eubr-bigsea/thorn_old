@@ -2,5 +2,5 @@
 PID_FILE=/usr/src/app/tmp/unicorn.pid
 [ -f "$PID_FILE" ] && rm "$PID_FILE"
 
-bundle exec rake db:setup || bundle exec rake db:migrate
+bundle exec rake db:create rake db:migrate
 bundle exec unicorn -c config/unicorn/docker.rb -E docker
