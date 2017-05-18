@@ -16,7 +16,10 @@ class ApplicationController < ActionController::Base
       user = user_email && User.find_by_email(user_email)
 
       if user && Devise.secure_compare(user.authentication_token, token)
-        sign_in user, store: false
+        @user = user
+        sign_in @user, store: false
+      else
+        render json: {errors: [{detail: "email and token validation failed", source: "data/attributes/email"},{detail: "email and token validation failed", source: "data/attributes/token"}]}, status: 404
       end
     end
   end

@@ -8,10 +8,10 @@ class Api::TokensController < ApiController
       if token_by_email == token_by_id
         render json: token_by_id, serializer: TokenSerializer, status: 200
       else
-        render json: {error: "email and id validation failed"}, status: 404
+        render json: {errors: [{detail: "email and id validation failed", source: "data/attributes/email"},{detail: "email and id validation failed", source: "data/attributes/id"}]}, status: 404
       end
     else
-      render json: {error: "token and id validation failed"}, status: 404
+      render json: {errors: [{detail: "token and id validation failed", source: "data/attributes/token"},{detail: "token and id validation failed",source: "data/attributes/id"}]}, status: 404
     end
   end
 
