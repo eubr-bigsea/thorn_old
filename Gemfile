@@ -32,7 +32,23 @@ gem 'jbuilder', '~> 2.5'
 gem 'rack-cors'
 
 group :development, :test do
+  gem 'database_cleaner'
+  gem 'rspec-rails'
   gem 'pry'
+  gem 'irbtools', require: 'irbtools/binding'
+  gem 'factory_girl_rails'
+  gem 'faker'
+  gem 'shoulda-matchers'
+  gem 'guard-rspec'
+  gem 'zeus'
+  gem 'capybara'
+  gem 'capybara-webkit'
+  gem 'rails-erd'
+  gem 'rails-controller-testing'
+end
+
+group :test do
+  gem 'launchy'
 end
 
 group :development do
