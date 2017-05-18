@@ -19,6 +19,7 @@ class User < ApplicationRecord
   validates :first_name, presence: true, length: {maximum: 30}
   validates :last_name, presence: true, length: {minimum: 2}
   validates :last_name, presence: true, length: {maximum: 30}
+  validates_format_of :email, with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i
 
   # Used when creating users
   def ensure_authentication_token
