@@ -1,3 +1,5 @@
+# Application Controller: User Authentication from token control
+# + CSRF protection for all Devise requests.
 class ApplicationController < ActionController::Base
   include ActionController::HttpAuthentication::Token::ControllerMethods
 
