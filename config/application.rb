@@ -8,21 +8,26 @@ require "active_record/railtie"
 require "action_controller/railtie"
 require "action_mailer/railtie"
 require "action_view/railtie"
+require "action_cable/engine"
+# require "sprockets/railtie"
+require "rails/test_unit/railtie"
 
+# Require the gems listed in Gemfile, including any gems
+# you've limited to :test, :development, or :production.
 Bundler.require(*Rails.groups)
 
-module LemonadeApi
+module Thorn
   class Application < Rails::Application
-    config.api_only = true
-    config.middleware.insert_before 0, Rack::Cors do
-      allow do
-        origins ENV['RAILS_CORS_ORIGINS'].to_s, "http://localhost:4200", /https?:\/\/localhost:(\d*)/
+    # Settings in config/environments/* take precedence over those specified here.
+    # Application configuration should go into files in config/initializers
+    # -- all .rb files in that directory are automatically loaded.
 
-        resource '*',
-          headers: :any,
-          methods: [:get, :post, :options, :delete, :put],
-          expose: ['access-token', 'expiry', 'token-type', 'uid', 'client']
-      end
-    end
+    # Only loads a smaller set of middleware suitable for API only apps.
+    # Middleware like session, flash, cookies can be added back manually.
+    # Skip views, helpers and assets when generating a new resource.
+    config.api_only = true
+    config.middleware.use ActionDispatch::Flash
+    # Do not swallow errors in after_commit/after_rollback callbacks.
+    config.active_record.raise_in_transactional_callbacks = true
   end
 end
