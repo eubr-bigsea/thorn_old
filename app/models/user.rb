@@ -9,6 +9,7 @@ class User < ApplicationRecord
   # Relationships
   has_many :workflows
   has_many :jobs
+  has_and_belongs_to_many :cards
 
   validates_presence_of :password_confirmation, on: :create
   validates :password, presence: true, length: { minimum: 6 }, on: :create
