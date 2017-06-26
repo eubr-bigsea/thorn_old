@@ -14,7 +14,7 @@ ActiveRecord::Schema.define(version: 20170626174546) do
 
   create_table "cards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
-    t.integer  "tipo"
+    t.string   "category"
     t.string   "title"
     t.string   "link"
     t.string   "content"

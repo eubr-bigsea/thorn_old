@@ -16,6 +16,10 @@ class Api::UsersController < ApiController
   def create
     tempUser = User.new(user_params.except(:current_password))
     tempUser.sign_in_count = 0
+    tempUser.cards << Card.first
+    tempUser.cards << Card.second
+    tempUser.cards << Card.third
+    tempUser.cards << Card.fourth
     if tempUser.save
       render json: tempUser
     else
