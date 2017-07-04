@@ -36,4 +36,7 @@ class Api::TokensController < ApiController
   def user_params
     ActiveModelSerializers::Deserialization.jsonapi_parse!(params.to_unsafe_h)
   end
+  def card_params
+    ActiveModelSerializers::Deserialization.jsonapi_parse!(params.to_unsafe_h)
+  end
 end
