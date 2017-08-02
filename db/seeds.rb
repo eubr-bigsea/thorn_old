@@ -7,9 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 #User.create(first_name: 'Matheus', last_name: 'Gonçalves', email: 'souzagonc@gmail.com', password: '123456', id: 6)
 basic_cards = [
-  ["message","Release notes", "","This is the version 2.0 of application Lemonade! With new operations, faster and simple to use this version brings the power of Apache Spark to execute data minning as easy as build a flow."],
-  ["latest-workflows", "Latest updated workflows", "", ""],
   ["video", "Basic tutorial", "5_sHXJC9ocA", ""],
+  ["latest-workflows", "Latest updated workflows", "", ""],
+  ["message","Release notes", "","This is the version 2.0 of application Lemonade! With new operations, faster and simple to use this version brings the power of Apache Spark to execute data minning as easy as build a flow."],
   ["latest-jobs", "Latest updated jobs", "", ""]
 ]
 
