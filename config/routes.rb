@@ -7,5 +7,6 @@ Rails.application.routes.draw do
   namespace :api do
     resources :users
     resources :tokens, only: [:create]
+    resources :cards
   end
 end

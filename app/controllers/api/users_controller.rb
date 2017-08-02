@@ -16,6 +16,7 @@ class Api::UsersController < ApiController
   def create
     tempUser = User.new(user_params.except(:current_password))
     tempUser.sign_in_count = 0
+    tempUser.cards << Card.first(4)
     if tempUser.save
       render json: tempUser
     else
@@ -46,6 +47,16 @@ class Api::UsersController < ApiController
   # Destroy User from the AMS Deserialization params.
   def destroy
     render json: {}, status: :method_not_allowed
+  end
+
+  def cards
+    @user = User.find params[:card_id]
+    @card = Card.find params[:id]
+    if request.put?
+      @user.cards << card
+    elsif request.delete?
+      @user.cards.destroy card
+    end
   end
 
   private
