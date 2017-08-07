@@ -1,5 +1,5 @@
 class ApiController < ApplicationController
-  before_filter :disable_devise_trackable
+  before_action :disable_devise_trackable
 
   # Shared JSON API render methods.
   protected
