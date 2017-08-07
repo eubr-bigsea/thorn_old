@@ -22,6 +22,7 @@ gem 'devise', '~> 4.2.0'
 gem 'puma', '~> 3.0'
 
 gem 'devise-i18n'
+gem 'net-ldap'
 gem 'omniauth'
 gem 'unicorn'
 
