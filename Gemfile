@@ -20,7 +20,6 @@ gem 'devise', '~> 4.2.0'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
-
 gem 'devise-i18n'
 gem 'net-ldap'
 gem 'omniauth'
