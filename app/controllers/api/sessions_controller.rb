@@ -1,5 +1,5 @@
 # Sessions Controller: Devise Custom Session Controller.
-class SessionsController < Devise::SessionsController
+class Api::SessionsController < Devise::SessionsController
   respond_to :json
 
   def create

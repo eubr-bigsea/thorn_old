@@ -50,16 +50,6 @@ class Api::UsersController < ApiController
     render json: {}, status: :method_not_allowed
   end
 
-  def cards
-    @user = User.find params[:card_id]
-    @card = Card.find params[:id]
-    if request.put?
-      @user.cards << card
-    elsif request.delete?
-      @user.cards.destroy card
-    end
-  end
-
   private
 
   # User object from the Deserialization params if there is an id.

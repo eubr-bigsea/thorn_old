@@ -25,4 +25,20 @@ en:
   latestUpdatedWorkflows: "Latest Updated workflows"
   releaseNotes: "Release Notes"
   releaseNotesMessage: "This is the version 2.0 of application Lemonade! With new operations, faster and simple to use this version brings the power of Apache Spark to execute data minning as easy as build a flow."
-
+  lemonade_mailer:
+    reset_password_instructions:
+      action: "Change my password"
+      greeting: "Hello %{recipient}!"
+      instruction: "Someone has requested a link to change your password, and you can do this through the link below."
+      instruction_2: "If you didn't request this, please ignore this email."
+      instruction_3: "Your password won't change until you access the link above and create a new one."
+      subject: "Reset password instructions"
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            password_confirmation:
+              confirmation: "The confirmation password doesn't match the password"
+            reset_password_token:
+              invalid: "This requet has expired. Please make another request."

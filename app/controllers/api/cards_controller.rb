@@ -4,7 +4,6 @@ class Api::CardsController < ApplicationController
   respond_to :json
 
   def index
-    I18n.locale = request.headers["locale"]
     @cards = Card.all
     @cards.each do |card|
       card.title = t(card.title)
@@ -25,6 +24,11 @@ class Api::CardsController < ApplicationController
   end
 
   def show
+    @card.title = t(@card.title)
+    if(@card.content != "")
+      @card.content = t(@card.content)
+    end
+
     render json: @card
   end
 
