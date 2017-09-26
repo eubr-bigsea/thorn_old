@@ -25,3 +25,20 @@ pt:
   latestUpdatedWorkflows: "Ultimos workflows"
   releaseNotes: "Novidades"
   releaseNotesMessage: "Esta é a versão 2.0 do Lemonade! Com novas operações, mais rápida e simples de usar. Esta versão traz consigo o poder do Apache Spark para mineirar dados de maneira tão fácil quanto construir um fluxo."
+  lemonade_mailer:
+    reset_password_instructions:
+      action: "Mudar minha senha"
+      greeting: "Olá %{recipient}!"
+      instruction: "Alguém solicitou um link para mudança sua senha e você pode fazer isso através do link abaixo."
+      instruction_2: "Se você não solicitou a mudança, por favor ignore este email."
+      instruction_3: "Sua senha não mudará até você acessar o link acima e criar uma nova senha."
+      subject: "Instruções de recuperação de senha."
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            password_confirmation:
+              confirmation: 'A senha de confirmação não é igual à senha.'
+            reset_password_token:
+              invalid: "Esta solicitação foi expirada. Por favor, faça uma nova solicitação."
