@@ -44,8 +44,8 @@ Rails.application.configure do
     domain: "200.131.6.43",
     authentication: "plain",
     enable_starttls_auto: true,
-    user_name: Rails.application.secrets.email_provider_username,
-    password: Rails.application.secrets.email_provider_password
+    user_name: ENV['EMAIL_PROVIDER_USERNAME'] || Rails.application.secrets.email_provider_username,
+    password: ENV['EMAIL_PROVIDER_PASSWORD'] || Rails.application.secrets.email_provider_password
   }
   # ActionMailer Config
   config.action_mailer.default_url_options = { :host => 'localhost:4200' }
