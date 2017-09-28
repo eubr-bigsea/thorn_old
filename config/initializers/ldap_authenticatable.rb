@@ -9,21 +9,29 @@ module Devise
           ldap = Net::LDAP.new
           ldap.host = 'ldap.dcc.ufmg.br'
           ldap.base = 'dc=dcc,dc=ufmg,dc=br'
-          ldap.auth "uid=#{email},ou=People,dc=dcc,dc=ufmg,dc=br", password
+          ldap.auth "uid=#{login},ou=People,dc=dcc,dc=ufmg,dc=br", password
 
           if ldap.bind
-            user = User.find_by(email: email)
+            user = User.find_by(email: login)
+            if user
+              user.update_attribute(:email, email)
+            else
+              user = User.find_by(email: email)
+            end
+
             if user
               success!(user)
             else
-              filter = Net::LDAP::Filter.eq( "uid", email )
+              filter = Net::LDAP::Filter.eq( "uid", login )
               ldap_user = {}
               ldap.search( :filter => filter ) do |entry|
-              ldap_user['first_name'] = entry.givenname[0]
-              ldap_user['last_name'] = entry.sn[0]
-              user = User.find_or_create_by(email: email)
-              user.update_attributes(ldap_user)
-              success!(user)
+                ldap_user['first_name'] = entry.givenname[0]
+                ldap_user['last_name'] = entry.sn[0]
+                user = User.find_or_create_by(email: email)
+                user.update_attributes(ldap_user)
+                user.cards << Card.first(4)
+                user.save
+                success!(user)
               end
             end
 
@@ -33,8 +41,12 @@ module Devise
         end
       end
 
-      def email
+      def login
         params[:user][:email].gsub('@dcc.ufmg.br', '')
+      end
+
+      def email
+        params[:user][:email]
       end
 
       def password
