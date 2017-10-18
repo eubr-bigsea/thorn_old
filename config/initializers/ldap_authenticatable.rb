@@ -11,32 +11,35 @@ module Devise
           ldap.base = 'dc=dcc,dc=ufmg,dc=br'
           ldap.auth "uid=#{login},ou=People,dc=dcc,dc=ufmg,dc=br", password
 
-          if ldap.bind
-            user = User.find_by(email: login)
-            if user
-              user.update_attribute(:email, email)
-            else
-              user = User.find_by(email: email)
-            end
-
-            if user
-              success!(user)
-            else
-              filter = Net::LDAP::Filter.eq( "uid", login )
-              ldap_user = {}
-              ldap.search( :filter => filter ) do |entry|
-                ldap_user['first_name'] = entry.givenname[0]
-                ldap_user['last_name'] = entry.sn[0]
-                user = User.find_or_create_by(email: email)
-                user.update_attributes(ldap_user)
-                user.cards << Card.first(4)
-                user.save
-                success!(user)
+          begin
+            if ldap.bind
+              user = User.find_by(email: login)
+              if user
+                user.update_attribute(:email, email)
+              else
+                user = User.find_by(email: email)
               end
-            end
 
-          else
-            return fail(:invalid_login)
+              if user
+                success!(user)
+              else
+                filter = Net::LDAP::Filter.eq( "uid", login )
+                ldap_user = {}
+                ldap.search( :filter => filter ) do |entry|
+                  ldap_user['first_name'] = entry.givenname[0]
+                  ldap_user['last_name'] = entry.sn[0]
+                  user = User.find_or_create_by(email: email)
+                  user.update_attributes(ldap_user)
+                  user.cards << Card.first(4)
+                  user.save
+                  success!(user)
+                end
+              end
+
+            else
+              return fail(:invalid_login)
+            end
+          rescue
           end
         end
       end
