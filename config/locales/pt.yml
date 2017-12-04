@@ -39,6 +39,12 @@ pt:
         user:
           attributes:
             password_confirmation:
-              confirmation: 'A senha de confirmação não é igual à senha.'
+              confirmation: 'A senha de confirmação não é igual a senha digitada.'
+              blank: 'não pode ser vazio'
+            current_password:
+              invalid: 'A senha digitada não corresponde a atual.'
+              blank: 'Não pode ser vazio'
+            password:
+              too_short: 'Senha digitada não tem tamanho suficiente.'
             reset_password_token:
               invalid: "Esta solicitação foi expirada. Por favor, faça uma nova solicitação."

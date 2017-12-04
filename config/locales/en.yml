@@ -40,5 +40,6 @@ en:
           attributes:
             password_confirmation:
               confirmation: "The confirmation password doesn't match the password"
+              blank: "Can't be blank"
             reset_password_token:
               invalid: "This requet has expired. Please make another request."

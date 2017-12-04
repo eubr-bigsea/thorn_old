@@ -36,9 +36,12 @@ class Api::UsersController < ApiController
         else
           render json: ErrorSerializer.serialize(@user.errors), status: :unprocessable_entity
         end
-      elsif @user.update_with_password(user_params)
+      elsif user_params[:password_confirmation] != '' && user_params[:password_confirmation] != nil && @user.update_with_password(user_params)
         render json: @user, status: :ok
       else
+        if user_params[:password_confirmation] == '' || user_params[:password_confirmation] == nil
+          @user.errors[:password_confirmation] << t('activerecord.errors.models.user.attributes.password_confirmation.blank')
+        end
         render json: ErrorSerializer.serialize(@user.errors), status: :unprocessable_entity
       end
     else
