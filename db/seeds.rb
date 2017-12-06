@@ -7,12 +7,12 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 #User.create(first_name: 'Matheus', last_name: 'Gonçalves', email: 'souzagonc@gmail.com', password: '123456', id: 6)
 basic_cards = [
-  ["video", "basicTutorial", "5_sHXJC9ocA", ""],
-  ["latest-workflows", "latestUpdatedWorkflows", "", ""],
-  ["message","releaseNotes", "","releaseNotesMessage"],
-  ["latest-jobs", "latestUpdatedJobs", "", ""],
+  { component: "video", title: "t('basicTutorial')", content: { link: '5_sHXJC9ocA'} },
+  { component: "latest-workflows", title: "t('latestUpdatedWorkflows')", content: { count: 5} },
+  { component: "latest-jobs", title: "t('latestUpdatedJobs')", content: { count: 5 } },
+  { component: "message", title: "t('releaseNotes')", content: { message: 'releaseNotesMessage'} }
 ]
 
-basic_cards.each do |category, title, link, content|
-  Card.create(category: category, title: title, link: link, content: content)
+basic_cards.each do |card|
+  Card.create(card)
 end

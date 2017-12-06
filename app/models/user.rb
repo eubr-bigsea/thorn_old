@@ -10,6 +10,7 @@ class User < ApplicationRecord
   has_many :workflows
   has_many :jobs
   has_and_belongs_to_many :cards
+  has_one :card_board
 
   validates_presence_of :password_confirmation, on: :create
   validates :password, presence: true, length: { minimum: 6 }, on: :create

@@ -1,10 +1,16 @@
-class Api::CardsController < ApplicationController
+class Api::CardBoardsController < ApplicationController
   before_action :set_card, only: [:show, :update, :destroy]
 
   respond_to :json
 
   def index
     @cards = Card.all
+    @cards.each do |card|
+      card.title = t(card.title)
+      if(card.content != "")
+        card.content = t(card.content)
+      end
+    end
     render json: @cards
   end
 
@@ -18,8 +24,7 @@ class Api::CardsController < ApplicationController
   end
 
   def show
-
-    render json: @card
+    render json: @card_board
   end
 
   def destroy
@@ -30,10 +35,10 @@ class Api::CardsController < ApplicationController
   private
 
   def set_card
-    @card = Card.find(params[:id])
+    @card_board = CardBoard.find(params[:id])
   end
 
-  def card_params
+  def card_board_params
     ActiveModelSerializers::Deserialization.jsonapi_parse!(params.to_unsafe_h)
   end
 
