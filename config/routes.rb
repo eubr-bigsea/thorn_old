@@ -8,6 +8,6 @@ Rails.application.routes.draw do
     resources :users
     resources :tokens, only: [:create]
     resources :cards
-    resources :card_boards, only: [:show]
+    resources :card_grids, only: [:show, :update]
   end
 end

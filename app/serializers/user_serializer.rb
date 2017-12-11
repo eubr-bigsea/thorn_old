@@ -4,5 +4,5 @@ class UserSerializer < ActiveModel::Serializer
   has_many :workflows
   has_many :jobs
   has_many :cards
-  has_one :card_board
+  has_one :card_grid
 end
