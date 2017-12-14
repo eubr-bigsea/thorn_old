@@ -7,10 +7,10 @@ class CardGrid < ApplicationRecord
 
   def assign_defaults
     self.configurations =  [
-      {cardId: 1, component: "video", x: 0, y: 0, width: 6, height: 5 },
-      {cardId: 2, component: "latest-workflows", x: 6, y: 0, width: 6, height: 5 },
-      {cardId: 3, component: "latest-jobs", x: 6, y: 5, width: 6, height: 5},
-      {cardId: 4, component: "message", x: 0, y: 5, width: 6, height: 5}
+      {cardId: 1, component: "video", x: 0, y: 0, width: 6, height: 5, uuid: '' },
+      {cardId: 2, component: "latest-workflows", x: 6, y: 0, width: 6, height: 5, uuid: '' },
+      {cardId: 3, component: "latest-jobs", x: 6, y: 5, width: 6, height: 5, uuid: ''},
+      {cardId: 4, component: "message", x: 0, y: 5, width: 6, height: 5, uuid: ''}
     ]
   end
 end
