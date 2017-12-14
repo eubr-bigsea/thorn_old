@@ -6,14 +6,12 @@ class CardGrid < ApplicationRecord
   private
 
   def assign_defaults
-
-    cards = Card.all.to_a
     conf = []
     col = 2
     row = 0
 
-    for i in 0..(Card.count-1)
-      conf << { cardId: cards[i].id, component: cards[i].component, x: i%col*6, y: row*5,  width: 6, height: 5, uuid: SecureRandom.uuid }
+    Card.all.each_with_index do |card, i|
+      conf << { cardId: card.id, component: card.component, x: i%col*6, y: row*5,  width: 6, height: 5, uuid: SecureRandom.uuid }
       row = row + i%col
     end
 
