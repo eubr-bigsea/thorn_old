@@ -21,7 +21,6 @@ class Api::UsersController < ApiController
   def create
     tempUser = User.new(user_params.except(:current_password))
     tempUser.sign_in_count = 0
-    tempUser.cards << Card.first(4)
     tempUser.card_grid = CardGrid.new
     if tempUser.save
       render json: tempUser

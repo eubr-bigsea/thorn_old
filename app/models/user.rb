@@ -4,12 +4,11 @@ class User < ApplicationRecord
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+    :recoverable, :rememberable, :trackable, :validatable
 
   # Relationships
   has_many :workflows
   has_many :jobs
-  has_and_belongs_to_many :cards
   has_one :card_grid
 
   validates_presence_of :password_confirmation, on: :create

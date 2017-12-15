@@ -10,7 +10,15 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171211163105) do
+ActiveRecord::Schema.define(version: 20171215161815) do
+
+  create_table "card_boards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id"
+    t.text     "configurations", limit: 65535
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.index ["user_id"], name: "index_card_boards_on_user_id", using: :btree
+  end
 
   create_table "card_grids", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
@@ -26,13 +34,6 @@ ActiveRecord::Schema.define(version: 20171211163105) do
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
     t.string   "component"
-  end
-
-  create_table "cards_users", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "card_id", null: false
-    t.integer "user_id", null: false
-    t.index ["card_id", "user_id"], name: "index_cards_users_on_card_id_and_user_id", using: :btree
-    t.index ["user_id", "card_id"], name: "index_cards_users_on_user_id_and_card_id", using: :btree
   end
 
   create_table "jobs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -71,6 +72,7 @@ ActiveRecord::Schema.define(version: 20171211163105) do
     t.index ["user_id"], name: "index_workflows_on_user_id", using: :btree
   end
 
+  add_foreign_key "card_boards", "users"
   add_foreign_key "card_grids", "users"
   add_foreign_key "jobs", "users"
   add_foreign_key "workflows", "users"
