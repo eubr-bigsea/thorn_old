@@ -10,6 +10,10 @@ class Api::UsersController < ApiController
 
   # Render the specified User using UserSerializer.
   def show
+    if @user.card_grid == nil
+      @user.card_grid = CardGrid.new
+      @user.save
+    end
     render json: @user
   end
 
@@ -17,7 +21,7 @@ class Api::UsersController < ApiController
   def create
     tempUser = User.new(user_params.except(:current_password))
     tempUser.sign_in_count = 0
-    tempUser.cards << Card.first(4)
+    tempUser.card_grid = CardGrid.new
     if tempUser.save
       render json: tempUser
     else
@@ -59,6 +63,6 @@ class Api::UsersController < ApiController
 
   # AMS User Deserialization.
   def user_params
-    ActiveModelSerializers::Deserialization.jsonapi_parse!(params.to_unsafe_h)
+    ActiveModelSerializers::Deserialization.jsonapi_parse!(params.to_unsafe_h).except(:card_grid_id)
   end
 end

@@ -10,22 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170626174546) do
+ActiveRecord::Schema.define(version: 20180111190751) do
 
-  create_table "cards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.string   "category"
-    t.string   "title"
-    t.string   "link"
-    t.string   "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+  create_table "card_grids", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.integer  "user_id"
+    t.text     "configurations", limit: 65535
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.index ["user_id"], name: "index_card_grids_on_user_id", using: :btree
   end
 
-  create_table "cards_users", id: false, force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer "card_id", null: false
-    t.integer "user_id", null: false
-    t.index ["card_id", "user_id"], name: "index_cards_users_on_card_id_and_user_id", using: :btree
-    t.index ["user_id", "card_id"], name: "index_cards_users_on_user_id_and_card_id", using: :btree
+  create_table "cards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
+    t.string   "title"
+    t.text     "content",    limit: 65535
+    t.string   "component"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
   end
 
   create_table "jobs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -53,6 +53,8 @@ ActiveRecord::Schema.define(version: 20170626174546) do
     t.string   "locale",                 default: "en"
     t.string   "profile_picture"
     t.string   "authentication_token"
+    t.integer  "card_grid_id"
+    t.index ["card_grid_id"], name: "index_users_on_card_grid_id", using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
@@ -64,6 +66,8 @@ ActiveRecord::Schema.define(version: 20170626174546) do
     t.index ["user_id"], name: "index_workflows_on_user_id", using: :btree
   end
 
+  add_foreign_key "card_grids", "users"
   add_foreign_key "jobs", "users"
+  add_foreign_key "users", "card_grids"
   add_foreign_key "workflows", "users"
 end

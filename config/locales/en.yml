@@ -21,8 +21,10 @@
 
 en:
   basicTutorial: "Basic tutorial"
-  latestUpdatedJobs: "Latest Updated jobs"
-  latestUpdatedWorkflows: "Latest Updated workflows"
+  latestUpdatedJobs: "Latest updated jobs"
+  latestUpdatedWorkflows: "Latest updated workflows"
+  latestUpdatedDashboards: "Latest updated dashboards"
+  latestUpdatedDatasources: "Latest updated datasources"
   releaseNotes: "Release Notes"
   releaseNotesMessage: "This is the version 2.0 of application Lemonade! With new operations, faster and simple to use this version brings the power of Apache Spark to execute data minning as easy as build a flow."
   lemonade_mailer:
