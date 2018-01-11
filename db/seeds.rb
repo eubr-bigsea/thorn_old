@@ -18,7 +18,9 @@ basic_cards = [
   { component: "video", title: "t('basicTutorial')", content: { link: '5_sHXJC9ocA'} },
   { component: "latest-workflows", title: "t('latestUpdatedWorkflows')", content: { size: 5} },
   { component: "latest-jobs", title: "t('latestUpdatedJobs')", content: { size: 5 } },
-  { component: "message", title: "t('releaseNotes')", content: { message: "t('releaseNotesMessage')"} }
+  { component: "message", title: "t('releaseNotes')", content: { message: "t('releaseNotesMessage')"} },
+  { component: "latest-dashboards", title: "t('latestUpdatedDashboards')", content: { size: 7} },
+  { component: "latest-datasources", title: "t('latestUpdatedDatasources')", content: { size: 7} }
 ]
 
 basic_cards.each do |card|
