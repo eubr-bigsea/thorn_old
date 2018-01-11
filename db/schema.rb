@@ -10,15 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171215161815) do
-
-  create_table "card_boards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
-    t.integer  "user_id"
-    t.text     "configurations", limit: 65535
-    t.datetime "created_at",                   null: false
-    t.datetime "updated_at",                   null: false
-    t.index ["user_id"], name: "index_card_boards_on_user_id", using: :btree
-  end
+ActiveRecord::Schema.define(version: 20180111190751) do
 
   create_table "card_grids", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.integer  "user_id"
@@ -31,9 +23,9 @@ ActiveRecord::Schema.define(version: 20171215161815) do
   create_table "cards", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "title"
     t.text     "content",    limit: 65535
+    t.string   "component"
     t.datetime "created_at",               null: false
     t.datetime "updated_at",               null: false
-    t.string   "component"
   end
 
   create_table "jobs", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
@@ -61,6 +53,8 @@ ActiveRecord::Schema.define(version: 20171215161815) do
     t.string   "locale",                 default: "en"
     t.string   "profile_picture"
     t.string   "authentication_token"
+    t.integer  "card_grid_id"
+    t.index ["card_grid_id"], name: "index_users_on_card_grid_id", using: :btree
     t.index ["email"], name: "index_users_on_email", unique: true, using: :btree
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true, using: :btree
   end
@@ -72,8 +66,8 @@ ActiveRecord::Schema.define(version: 20171215161815) do
     t.index ["user_id"], name: "index_workflows_on_user_id", using: :btree
   end
 
-  add_foreign_key "card_boards", "users"
   add_foreign_key "card_grids", "users"
   add_foreign_key "jobs", "users"
+  add_foreign_key "users", "card_grids"
   add_foreign_key "workflows", "users"
 end
