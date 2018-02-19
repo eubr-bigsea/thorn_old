@@ -5,7 +5,6 @@ class ApplicationController < ActionController::Base
 
   respond_to :json
   before_action :set_locale
-  before_action :authenticate_user_from_token!
   before_action :configure_permitted_parameters, if: :devise_controller?
 
 
