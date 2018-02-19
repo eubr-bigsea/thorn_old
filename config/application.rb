@@ -28,7 +28,6 @@ module Thorn
     config.api_only = true
     config.middleware.use ActionDispatch::Flash
     # Do not swallow errors in after_commit/after_rollback callbacks.
-    config.active_record.raise_in_transactional_callbacks = true
     config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.yml')]
     config.i18n.default_locale = :en
   end
