@@ -5,9 +5,8 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0.6'
+gem 'rails', '~> 5.1.5'
 
 # AMS
 gem 'active_model_serializers', '~> 0.10.7'
@@ -16,7 +15,7 @@ gem 'active_model_serializers', '~> 0.10.7'
 gem 'mysql2', '~> 0.4.10'
 
 # Flexible authentication solution for Rails
-gem 'devise', '~> 4.3.0'
+gem 'devise', '~> 4.4.1'
 
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
@@ -50,7 +49,7 @@ group :test do
 end
 
 group :development do
-  gem 'listen', '~> 3.0.5'
+  gem 'listen', '~> 3.1.5'
   gem 'capistrano-rails'
   gem 'capistrano-bundler'
   gem 'capistrano-rbenv'
