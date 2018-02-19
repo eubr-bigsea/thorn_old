@@ -1,5 +1,6 @@
 # Users Controller: JSON response through Active Model Serializers
 class Api::UsersController < ApiController
+  before_action :authenticate_user_from_token!, except: [:create]
   respond_to :json
 
   # Render all Users using UserSerializer.

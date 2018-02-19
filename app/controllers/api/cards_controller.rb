@@ -1,4 +1,5 @@
 class Api::CardsController < ApplicationController
+  before_action :authenticate_user_from_token!
   before_action :set_card, only: [:show, :update, :destroy]
 
   respond_to :json
