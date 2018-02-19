@@ -10,6 +10,6 @@ RSpec.configure do |config|
 
   config.after(:example) do |example|
     DatabaseCleaner.clean
-    FactoryGirl.reload if example.metadata[:js]
+    FactoryBot.reload if example.metadata[:js]
   end
 end
