@@ -6,19 +6,19 @@ git_source(:github) do |repo_name|
 end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.1.5'
+gem 'rails'
 
 # AMS
-gem 'active_model_serializers', '~> 0.10.7'
+gem 'active_model_serializers'
 
 # Use MySql as the database for Active Record
-gem 'mysql2', '~> 0.4.10'
+gem 'mysql2'
 
 # Flexible authentication solution for Rails
-gem 'devise', '~> 4.4.1'
+gem 'devise'
 
 # Use Puma as the app server
-gem 'puma', '~> 3.0'
+gem 'puma'
 gem 'devise-i18n'
 gem 'net-ldap'
 gem 'omniauth'

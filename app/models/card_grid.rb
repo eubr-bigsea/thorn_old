@@ -1,5 +1,5 @@
 class CardGrid < ApplicationRecord
-  after_initialize :assign_defaults, if: 'new_record?'
+  after_initialize :assign_defaults, if: -> { new_record? }
   belongs_to :user
   serialize :configurations, Array
 
