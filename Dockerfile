@@ -1,18 +1,18 @@
-FROM ruby:2.4
-MAINTAINER Guilherme Maluf <guimalufb@gmail.com>
+FROM ruby:2.4-alpine
+LABEL maintainer="Guilherme Maluf <guimalufb@gmail.com>"
 
 # throw errors if Gemfile has been modified since Gemfile.lock
 RUN bundle config --global frozen 1
 
-RUN mkdir -p /usr/src/app
-WORKDIR /usr/src/app
+ENV RAILS_ENV=docker
+ENV THORN_HOME=/usr/src/app/
 
-COPY Gemfile /usr/src/app/
-COPY Gemfile.lock /usr/src/app/
+WORKDIR $THORN_HOME
+
+COPY Gemfile Gemfile.lock $THORN_HOME
 RUN bundle install --without development:test
 
-COPY . /usr/src/app
+COPY . $THORN_HOME
 
-ENV RAILS_ENV docker
 EXPOSE 3000
 CMD ["/bin/bash", "/usr/src/app/run"]
