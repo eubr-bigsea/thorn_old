@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/sh
 PID_FILE=/usr/src/app/tmp/unicorn.pid
 [ -f "$PID_FILE" ] && rm "$PID_FILE"
 
