@@ -24,5 +24,5 @@ basic_cards = [
 ]
 
 basic_cards.each do |card|
-  Card.create(card)
+  Card.create(card) if Card.find_by(component: card[:component]).nil?
 end
