@@ -18,39 +18,41 @@
             <script type="text/javascript" src="${url.resourcesPath}/${script}"></script>
         </#list>
     </#if>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 </head>
 <body class="admin-console user ${bodyClass}">
-        
-    <header class="navbar navbar-default navbar-pf navbar-main header">
-        <nav class="navbar" role="navigation">
-            <div class="navbar-header">
-                <div class="container">
-                    <h1 class="navbar-title">Keycloak</h1>
-                </div>
-            </div>
-            <div class="navbar-collapse navbar-collapse-1">
-                <div class="container">
-                    <ul class="nav navbar-nav navbar-utility">
-                        <#if realm.internationalizationEnabled>
-                            <li>
-                                <div class="kc-dropdown" id="kc-locale-dropdown">
-                                    <a href="#" id="kc-current-locale-link">${locale.current}</a>
-                                    <ul>
-                                        <#list locale.supported as l>
-                                            <li class="kc-dropdown-item"><a href="${l.url}">${l.label}</a></li>
-                                        </#list>
-                                    </ul>
-                                </div>
-                            <li>
-                        </#if>
-                        <#if referrer?has_content && referrer.url?has_content><li><a href="${referrer.url}" id="referrer">${msg("backTo",referrer.name)}</a></li></#if>
-                        <li><a href="${url.logoutUrl}">${msg("doSignOut")}</a></li>
+    <div class="div-out">
+        <div class="div-in"></div>
+    </div>
+    <div class="header">
+        <div class="logo"></div>
+        <div class="menu d-none d-sm-block">
+            <a>ABOUT</a>
+            <a>SERVICES</a>
+            <a>TEAM</a>
+            <a>SUPPORTERS</a>
+        </div>
+         <#if referrer?has_content && referrer.url?has_content><a href="${referrer.url}" id="referrer" class="sign-out">${msg("backTo",referrer.name)}</a></#if>
+        <a class="sign-out" href="${url.logoutUrl}">${msg("doSignOut")}</a>
+    </div>
+    <#if realm.internationalizationEnabled>
+        <div class="internationalization-wrapper">
+            <div class="float-right">
+                <div class="kc-dropdown" id="kc-locale-dropdown">
+                    <a href="#" id="kc-current-locale-link">${locale.current}</a>
+                    <ul>
+                        <#list locale.supported as l>
+                            <li class="kc-dropdown-item"><a href="${l.url}">${l.label}</a></li>
+                        </#list>
                     </ul>
                 </div>
             </div>
-        </nav>
-    </header>
-
+        </div>
+    </#if>
+    <br>
     <div class="container">
         <div class="bs-sidebar col-sm-3">
             <ul>

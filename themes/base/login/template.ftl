@@ -37,15 +37,29 @@
 
 <body class="${properties.kcBodyClass!}">
   <div class="${properties.kcLoginClass!}">
-    <div id="kc-header" class="${properties.kcHeaderClass!}">
-      <div id="kc-header-wrapper" class="${properties.kcHeaderWrapperClass!}">${kcSanitize(msg("loginTitleHtml",(realm.displayNameHtml!'')))?no_esc}</div>
+    <div class="div-out">
+        <div class="div-in"></div>
     </div>
+    <div class="header">
+        <div class="logo"></div>
+        <div class="menu d-none d-sm-block">
+            <a>ABOUT</a>
+            <a>SERVICES</a>
+            <a>TEAM</a>
+            <a>SUPPORTERS</a>
+        </div>
+        <a href="//htmlpreview.github.io/?https://github.com/eubr-bigsea/citrus/blob/feature/new-landing-page/landing-page/index.html#" class="enter">SIGN IN</a>
+    </div>
+    <br>
+    <h1 class="text-center custom-display-4">${kcSanitize(msg("loginTitleHtml",(realm.displayNameHtml!'')))?no_esc}</h1>
+
     <div class="${properties.kcFormCardClass!} <#if displayWide>${properties.kcFormCardAccountClass!}</#if>">
       <header class="${properties.kcFormHeaderClass!}">
-        <div id="kc-page-title-wrapper">
-            <h1 id="kc-page-title" class="float-left"><#nested "header"></h1>
-            <div class="float-right navbar-brand citrus-logo"></div>
-        </div>
+
+
+      </header>
+      <div id="kc-content">
+        <div id="kc-content-wrapper">
         <#if realm.internationalizationEnabled  && locale.supported?size gt 1>
             <div id="kc-locale">
                 <div id="kc-locale-wrapper" class="${properties.kcLocaleWrapperClass!}">
@@ -60,10 +74,6 @@
                 </div>
             </div>
         </#if>
-        
-      </header>
-      <div id="kc-content">
-        <div id="kc-content-wrapper">
 
           <#if displayMessage && message?has_content>
               <div class="alert alert-${message.type}">
