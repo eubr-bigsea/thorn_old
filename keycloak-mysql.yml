@@ -6,11 +6,11 @@ services:
     environment:
       KEYCLOAK_USER: admin
       KEYCLOAK_PASSWORD: password
-      #KEYCLOAK_IMPORT: /tmp/realms/realm-export.json
+      KEYCLOAK_IMPORT: /tmp/realms/realm-export.json
       # Uncomment the line below if you want to specify JDBC parameters. The parameter below is just an example, and it shouldn't be used in production without knowledge. It is highly recommended that you read the MySQL JDBC driver documentation in order to use it.
       #JDBC_PARAMS: "connectTimeout=30000"
     ports:
-      - 8080:8080
+      - 9080:8080
     networks:
       - default
     volumes:
