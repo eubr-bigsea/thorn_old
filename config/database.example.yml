@@ -2,8 +2,8 @@ default: &default
   adapter: mysql2
   encoding: utf8
   pool: 5
-  username: thorn_user
-  password: lemonade123
+  username: root
+  password:
   host: localhost
 
 development:
@@ -24,3 +24,4 @@ production:
 docker:
   <<: *default
   database: thorn
+  host: mysql

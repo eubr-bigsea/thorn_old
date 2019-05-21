@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # Be sure to restart your server when you modify this file.
 
 # Avoid CORS issues when API is called from the frontend app.
@@ -7,11 +9,11 @@
 
 Rails.application.config.middleware.insert_before 0, Rack::Cors do
   allow do
-    origins ENV['RAILS_CORS_ORIGINS'].to_s, "http://localhost:4200", /https?:\/\/localhost:(\d*)/
+    origins ENV['RAILS_CORS_ORIGINS'].to_s, 'http://localhost:8080', %r{https?://localhost:(\d*)}
 
     resource '*',
-      headers: :any,
-      methods: %i{get post put patch delete options head },
-      expose: ['access-token', 'expiry', 'token-type', 'uid', 'client']
+             headers: :any,
+             methods: %i[get post put patch delete options head],
+             expose: ['access-token', 'expiry', 'token-type', 'uid', 'client']
   end
 end
