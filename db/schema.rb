@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_07_30_003055) do
+ActiveRecord::Schema.define(version: 2019_07_30_004542) do
 
   create_table "jobs", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id"
@@ -34,6 +34,15 @@ ActiveRecord::Schema.define(version: 2019_07_30_003055) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  create_table "whitelisted_jwts", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.string "jti", null: false
+    t.string "aud"
+    t.datetime "exp", null: false
+    t.integer "user_id", null: false
+    t.index ["jti"], name: "index_whitelisted_jwts_on_jti", unique: true
+    t.index ["user_id"], name: "index_whitelisted_jwts_on_user_id"
+  end
+
   create_table "workflows", id: :integer, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.integer "user_id"
     t.datetime "created_at", null: false
@@ -42,5 +51,6 @@ ActiveRecord::Schema.define(version: 2019_07_30_003055) do
   end
 
   add_foreign_key "jobs", "users"
+  add_foreign_key "whitelisted_jwts", "users", on_delete: :cascade
   add_foreign_key "workflows", "users"
 end
