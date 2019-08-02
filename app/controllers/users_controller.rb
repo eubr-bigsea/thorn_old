@@ -1,36 +1,39 @@
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show update destroy]
+  load_and_authorize_resource
+  before_action :set_user, only: %i[confirm show update destroy]
 
   def index
     @users = User.all
 
-    render json: @users
+    paginate @users, UserSerializer
   end
 
   def show
-    render json: @user
+    render json: UserSerializer.new(@user)
   end
 
   def create
     @user = User.new(user_params)
+    @user.skip_confirmation_notification!
+    @user.save!
 
-    if @user.save
-      render json: @user, status: :created, location: @user
-    else
-      render json: @user.errors, status: :unprocessable_entity
-    end
+    render json: UserSerializer.new(@user), status: :created
   end
 
   def update
-    if @user.update(user_params)
-      render json: @user
-    else
-      render json: @user.errors, status: :unprocessable_entity
-    end
+    @user.update!(user_params)
+
+    render json: UserSerializer.new(@user)
   end
 
   def destroy
     @user.destroy
+  end
+
+  def confirm
+    @user.confirm
+
+    render json: UserSerializer.new(@user)
   end
 
   private
@@ -40,6 +43,6 @@ class UsersController < ApplicationController
   end
 
   def user_params
-    params.fetch(:user, {})
+    params.require(:user).permit(:email, :password, :first_name, :last_name, :locale)
   end
 end

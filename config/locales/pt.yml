@@ -1,0 +1,52 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# To learn more, please read the Rails Internationalization guide
+# available at http://guides.rubyonrails.org/i18n.html.
+
+pt:
+  basicTutorial: 'Tutorial basico'
+  latestUpdatedJobs: 'Últimos jobs executados'
+  latestUpdatedWorkflows: 'Últimos workflows'
+  latestUpdatedDashboards: 'Últimos dashboards'
+  latestUpdatedDatasources: 'Últimas datasources'
+  releaseNotes: 'Novidades'
+  releaseNotesMessage: 'Esta é a versão 2.0 do Lemonade! Com novas operações, mais rápida e simples de usar. Esta versão traz consigo o poder do Apache Spark para mineirar dados de maneira tão fácil quanto construir um fluxo.'
+  lemonade_mailer:
+    reset_password_instructions:
+      action: 'Mudar minha senha'
+      greeting: 'Olá %{recipient}!'
+      instruction: 'Alguém solicitou um link para mudança sua senha e você pode fazer isso através do link abaixo.'
+      instruction_2: 'Se você não solicitou a mudança, por favor ignore este email.'
+      instruction_3: 'Sua senha não mudará até você acessar o link acima e criar uma nova senha.'
+      subject: 'Instruções de recuperação de senha.'
+  activerecord:
+    errors:
+      models:
+        user:
+          attributes:
+            password_confirmation:
+              confirmation: 'A senha de confirmação não é igual a senha digitada.'
+              blank: 'não pode ser vazio'
+            current_password:
+              invalid: 'A senha digitada não corresponde a atual.'
+              blank: 'Não pode ser vazio'
+            password:
+              too_short: 'Senha digitada não tem tamanho suficiente.'
+            reset_password_token:
+              invalid: 'Esta solicitação foi expirada. Por favor, faça uma nova solicitação.'

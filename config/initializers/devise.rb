@@ -3,12 +3,15 @@ require 'json_failure_app'
 # Use this hook to configure devise mailer, warden hooks and so forth.
 # Many of these configuration options can be set straight in your model.
 Devise.setup do |config|
+  config.warden do |manager|
+    manager.default_strategies(scope: :user).unshift :ldap_authenticatable
+  end
   # The secret key used by Devise. Devise uses this key to generate
   # random tokens. Changing this key will render invalid all existing
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = 'e7db804b68f757ed2b2ab4e4c94a8ca768ea43f86bfe20c8fa0f5248fca9ede314d91432a1e4525df3a8c6a8ea73d15c4d1dd47c8cdeef35f1681da141f85767'
+  # config.secret_key = 'e7db804b68f7572ab4e4c94a8ca768ea43f86bfe20c8fa0f5248fca9ede314d91432a1e4525df3a8c6a8ea73d15c4d1dd47c8cdeef35f1681da141f85767'
 
   # ==> Controller configuration
   # Configure the parent class to the devise controllers.
@@ -18,10 +21,10 @@ Devise.setup do |config|
   # Configure the e-mail address which will be shown in Devise::Mailer,
   # note that it will be overwritten if you use your own mailer class
   # with default "from" parameter.
-  config.mailer_sender = 'please-change-me-at-config-initializers-devise@example.com'
+  config.mailer_sender = ENV['EMAIL_PROVIDER_USERNAME'] || Rails.application.secrets.email_provider_username
 
   # Configure the class responsible to send e-mails.
-  # config.mailer = 'Devise::Mailer'
+  config.mailer = 'LemonadeMailer'
 
   # Configure the parent class responsible to send e-mails.
   # config.parent_mailer = 'ActionMailer::Base'
@@ -251,7 +254,7 @@ Devise.setup do |config|
   # should add them to the navigational formats lists.
   #
   # The "*/*" below is required to match Internet Explorer requests.
-  # config.navigational_formats = ['*/*', :html]
+  config.navigational_formats = [:"*/*", '*/*', :json]
 
   # The default HTTP method used to sign out a resource. Default is :delete.
   config.sign_out_via = :delete

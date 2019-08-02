@@ -1,4 +1,3 @@
-# Users Controller: JSON response through Active Model Serializers
 class TokensController < ApplicationController
   respond_to :json
 

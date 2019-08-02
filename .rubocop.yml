@@ -7,6 +7,8 @@ require:
 AllCops:
   TargetRubyVersion: 2.6.3
   AllowSymlinksInCacheRootDirectory: true
+  Exclude:
+    - 'db/structure.sql'
 
 Layout/AlignHash:
   EnforcedColonStyle: table

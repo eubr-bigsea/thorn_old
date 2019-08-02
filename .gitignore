@@ -13,12 +13,14 @@
 !/log/.keep
 !/tmp/.keep
 
+# Ignore Byebug command history file.
 .byebug_history
+*.swp
+/config/database.yaml
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
-/config/database.yml
 /.env
 /coverage
 /docs/*

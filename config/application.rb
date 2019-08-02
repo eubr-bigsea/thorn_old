@@ -9,12 +9,14 @@ require 'action_mailer/railtie'
 
 Bundler.require(*Rails.groups)
 
-module Server
+module Thorn
   class Application < Rails::Application
     config.load_defaults 6.0
     config.api_only = true
     config.middleware.use Rack::Attack
     config.active_record.schema_format = :sql
     config.autoload_paths << Rails.root.join('lib')
+    config.i18n.load_path += Dir[Rails.root.join('config', 'locales', '**', '*.yml')]
+    config.i18n.default_locale = :en
   end
 end

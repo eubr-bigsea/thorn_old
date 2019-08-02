@@ -14,7 +14,8 @@ module JsonapiErrors
         'JsonapiErrors::Errors::Unauthorized' => 'JsonapiErrors::Errors::Unauthorized',
         'JsonapiErrors::Errors::StandardError' => 'JsonapiErrors::Errors::StandardError',
         'ActiveRecord::RecordNotFound' => 'JsonapiErrors::Errors::NotFound',
-        'ActiveRecord::RecordInvalid' => 'JsonapiErrors::Errors::Invalid'
+        'ActiveRecord::RecordInvalid' => 'JsonapiErrors::Errors::Invalid',
+        'ActionController::ParameterMissing' => 'JsonapiErrors::Errors::ParameterMissing'
       )
     end
   end

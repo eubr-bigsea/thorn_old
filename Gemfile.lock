@@ -62,6 +62,7 @@ GEM
       msgpack (~> 1.0)
     builder (3.2.3)
     byebug (11.0.1)
+    cancancan (3.0.1)
     concurrent-ruby (1.1.5)
     crass (1.0.4)
     devise (4.6.2)
@@ -179,6 +180,7 @@ GEM
     responders (3.0.0)
       actionpack (>= 5.0)
       railties (>= 5.0)
+    rolify (5.2.0)
     rubocop (0.73.0)
       jaro_winkler (~> 1.5.1)
       parallel (~> 1.10)
@@ -220,6 +222,7 @@ PLATFORMS
 DEPENDENCIES
   bootsnap (>= 1.4.2)
   byebug
+  cancancan
   devise
   devise-jwt (~> 0.5.9)
   fast_jsonapi
@@ -233,6 +236,7 @@ DEPENDENCIES
   rack-cors
   rails (~> 6.0.0.rc1)
   rails-i18n (~> 6.0.0.beta1)
+  rolify
   rubocop-performance
 
 RUBY VERSION
