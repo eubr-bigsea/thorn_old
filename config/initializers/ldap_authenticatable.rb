@@ -12,22 +12,26 @@ module Devise
         ldap.base = 'dc=dcc,dc=ufmg,dc=br'
         ldap.auth "uid=#{login},ou=People,dc=dcc,dc=ufmg,dc=br", password
 
-        raise(:invalid_login) unless ldap.bind
+        begin
+          raise(:invalid_login) unless ldap.bind
 
-        unless (user = User.find_by(email: email))
-          filter = Net::LDAP::Filter.eq('uid', login)
-          ldap_user = {}
-          ldap.search(filter: filter) do |entry|
-            ldap_user['first_name'] = entry.givenname[0]
-            ldap_user['last_name'] = entry.sn[0]
-            user = User.find_or_create_by(email: email)
-            user.update_attributes(ldap_user)
-            user.skip_confirmation_notification!
-            user.save
+          unless (user = User.find_by(email: email))
+            filter = Net::LDAP::Filter.eq('uid', login)
+            ldap_user = {}
+            ldap.search(filter: filter) do |entry|
+              ldap_user['first_name'] = entry.givenname[0]
+              ldap_user['last_name'] = entry.sn[0]
+              user = User.find_or_create_by(email: email)
+              user.update_attributes(ldap_user)
+              user.skip_confirmation_notification!
+              user.save
+            end
           end
-        end
 
-        success!(user)
+          success!(user)
+        rescue Net::LDAP::Error
+          return
+        end
       end
 
       def login
