@@ -6,4 +6,6 @@ class UserSerializer
   attribute :full_name do |object|
     "#{object.first_name} #{object.last_name}"
   end
+
+  attribute :is_admin, &:is_admin?
 end

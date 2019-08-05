@@ -15,6 +15,6 @@ Rails.application.config.middleware.insert_before 0, Rack::Cors do
              headers: :any,
              methods: %i[get post put patch delete options head],
              expose:  %w[Authorization uid],
-             max_age: 600
+             max_age: 60_000
   end
 end

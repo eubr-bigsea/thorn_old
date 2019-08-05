@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   scope :api, defaults: { format: :json } do
-    devise_for :users, skip: :registrations
+    devise_for :users, skip: %i[confirmations registrations]
     devise_scope :user do
       resource :registration, only: %i[create update], path: 'users', controller: 'registrations'
     end

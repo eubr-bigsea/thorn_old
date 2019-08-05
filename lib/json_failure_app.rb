@@ -8,4 +8,12 @@ class JsonFailureApp < Devise::FailureApp
     serialized = JE::ErrorSerializer.new(error)
     serialized.to_h.to_json
   end
+
+  def redirect_url
+    nil
+  end
+
+  def respond
+    http_auth 
+  end
 end
