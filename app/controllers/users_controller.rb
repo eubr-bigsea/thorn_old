@@ -36,6 +36,10 @@ class UsersController < ApplicationController
     render json: UserSerializer.new(@user)
   end
 
+  def me
+    render json: UserSerializer.new(current_user)
+  end
+
   private
 
   def set_user

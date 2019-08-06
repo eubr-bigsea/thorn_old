@@ -302,6 +302,7 @@ Devise.setup do |config|
 
   config.jwt do |jwt|
     jwt.secret = Rails.env.development? ? 'DEVISE_JWT_SECRET_KEY' : ENV['DEVISE_JWT_SECRET_KEY']
+    jwt.expiration_time = 2_628_000
   end
 
   config.warden do |manager|

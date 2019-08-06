@@ -5,6 +5,12 @@ Rails.application.routes.draw do
       resource :registration, only: %i[create update], path: 'users', controller: 'registrations'
     end
 
+    resources :users, only: %i[] do
+      collection do
+        get :me
+      end
+    end
+
     resources :tokens, only: :create
   end
   scope :administration, defaults: { format: :json } do
