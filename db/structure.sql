@@ -79,7 +79,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_users_on_email` (`email`),
   UNIQUE KEY `index_users_on_reset_password_token` (`reset_password_token`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `users_roles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -105,7 +105,7 @@ CREATE TABLE `whitelisted_jwts` (
   UNIQUE KEY `index_whitelisted_jwts_on_jti` (`jti`),
   KEY `index_whitelisted_jwts_on_user_id` (`user_id`),
   CONSTRAINT `fk_rails_fb288e0065` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=53 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `workflows`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -147,6 +147,7 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20190730003055'),
 ('20190730004542'),
 ('20190802170511'),
-('20190802172010');
+('20190802172010'),
+('20190807143203');
 
 
