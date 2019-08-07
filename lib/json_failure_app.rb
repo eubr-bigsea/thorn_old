@@ -14,6 +14,6 @@ class JsonFailureApp < Devise::FailureApp
   end
 
   def respond
-    http_auth 
+    http_auth
   end
 end

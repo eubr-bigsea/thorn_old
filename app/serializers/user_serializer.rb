@@ -7,5 +7,7 @@ class UserSerializer
     "#{object.first_name} #{object.last_name}"
   end
 
-  attribute :is_admin, &:is_admin?
+  attribute :roles do |object|
+    object.roles.map(&:name)
+  end
 end
