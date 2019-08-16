@@ -11,6 +11,7 @@ class RolesController < ApplicationController
     render json: @role
   end
 
+  def create
     @role = Role.new(role_params)
 
     if @role.save
@@ -18,7 +19,7 @@ class RolesController < ApplicationController
     else
       render json: @role.errors, status: :unprocessable_entity
     end
-  end
+    end
 
   def update
     if @role.update(role_params)
