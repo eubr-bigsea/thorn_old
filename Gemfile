@@ -18,12 +18,17 @@ gem 'rails', '~> 6.0.0.rc1'
 gem 'rails-i18n', '~> 6.0.0.beta1'
 gem 'rolify'
 gem 'tzinfo-data'
+gem 'unicorn'
 
 group :development, :test do
   gem 'byebug'
 end
 
 group :development do
+  gem 'capistrano-bundler'
+  gem 'capistrano-rails'
+  gem 'capistrano-rbenv'
+  gem 'capistrano3-unicorn'
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'rubocop-performance', require: false
 end
