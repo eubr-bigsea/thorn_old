@@ -3,12 +3,7 @@ class ApplicationController < ActionController::API
   include Paginate
   include JsonapiErrors # ALIAS JE
 
-  rescue_from ::StandardError, with: ->(e) { 
-    puts '**********************************'
-    puts e
-    puts '**********************************'
-
-    handle_error(e) }
+  rescue_from ::StandardError, with: ->(e) { handle_error(e) }
   rescue_from CanCan::AccessDenied do |_e|
     error = Errors::Unauthorized.new(message: 'You don\'t has access level to this action.')
     handle_error(error)
