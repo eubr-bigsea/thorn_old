@@ -17,6 +17,7 @@ gem 'rack-cors'
 gem 'rails', '~> 6.0.0.rc1'
 gem 'rails-i18n', '~> 6.0.0.beta1'
 gem 'rolify'
+gem 'tzinfo-data'
 
 group :development, :test do
   gem 'byebug'

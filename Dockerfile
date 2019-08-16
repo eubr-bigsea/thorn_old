@@ -13,7 +13,8 @@ RUN apk add --no-cache \
       build-base \
       libxml2-dev \
       libxslt-dev \
-      mysql-dev
+      mysql-dev \
+      tzdata
 
 COPY Gemfile Gemfile.lock ./
 RUN bundle install --without development:test
