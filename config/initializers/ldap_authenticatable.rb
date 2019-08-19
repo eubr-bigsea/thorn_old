@@ -5,42 +5,32 @@ module Devise
   module Strategies
     class LdapAuthenticatable < Authenticatable
       def authenticate!
-        if params[:user]
-          ldap = Net::LDAP.new
-          ldap.host = 'ldap.dcc.ufmg.br'
-          ldap.base = 'dc=dcc,dc=ufmg,dc=br'
-          ldap.auth "uid=#{login},ou=People,dc=dcc,dc=ufmg,dc=br", password
+        return unless params[:user]
 
-          begin
-            if ldap.bind
-              user = User.find_by(email: login)
-              if user
-                user.update_attribute(:email, email)
-              else
-                user = User.find_by(email: email)
-              end
+        ldap = Net::LDAP.new
+        ldap.host = 'ldap.dcc.ufmg.br'
+        ldap.base = 'dc=dcc,dc=ufmg,dc=br'
+        ldap.auth "uid=#{login},ou=People,dc=dcc,dc=ufmg,dc=br", password
 
-              if user
-                success!(user)
-              else
-                filter = Net::LDAP::Filter.eq( "uid", login )
-                ldap_user = {}
-                ldap.search( :filter => filter ) do |entry|
-                  ldap_user['first_name'] = entry.givenname[0]
-                  ldap_user['last_name'] = entry.sn[0]
-                  user = User.find_or_create_by(email: email)
-                  user.update_attributes(ldap_user)
-                  user.cards << Card.first(4)
-                  user.save
-                  success!(user)
-                end
-              end
+        begin
+          raise(:invalid_login) unless ldap.bind
 
-            else
-              return fail(:invalid_login)
+          unless (user = User.find_by(email: email))
+            filter = Net::LDAP::Filter.eq('uid', login)
+            ldap_user = {}
+            ldap.search(filter: filter) do |entry|
+              ldap_user['first_name'] = entry.givenname[0]
+              ldap_user['last_name'] = entry.sn[0]
+              user = User.find_or_create_by(email: email)
+              user.update_attributes(ldap_user)
+              user.skip_confirmation_notification!
+              user.save
             end
-          rescue
           end
+
+          success!(user)
+        rescue Net::LDAP::Error
+          return
         end
       end
 
@@ -55,7 +45,6 @@ module Devise
       def password
         params[:user][:password]
       end
-
     end
   end
 end

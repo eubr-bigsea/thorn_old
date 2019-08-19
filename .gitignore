@@ -18,3 +18,11 @@
 *.swp
 /config/database.yaml
 
+# Ignore master key for decrypting credentials and more.
+/config/master.key
+
+/.env
+/coverage
+/docs/*
+/node_modules
+/public/files

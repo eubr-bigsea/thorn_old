@@ -1,58 +1,34 @@
 source 'https://rubygems.org'
 
-git_source(:github) do |repo_name|
-  repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
-  "https://github.com/#{repo_name}.git"
-end
+ruby '2.6.3'
 
-# Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails'
-
-# AMS
-gem 'active_model_serializers'
-
-# Use MySql as the database for Active Record
-gem 'mysql2'
-
-# Flexible authentication solution for Rails
+gem 'bootsnap', '>= 1.4.2', require: false
+gem 'cancancan'
 gem 'devise'
-
-# Use Puma as the app server
-gem 'puma'
-gem 'devise-i18n'
+gem 'devise-jwt', '~> 0.5.9'
+gem 'fast_jsonapi'
+gem 'kaminari'
+gem 'mysql2'
 gem 'net-ldap'
 gem 'omniauth'
-gem 'unicorn'
-gem 'tzinfo-data'
-
-# Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
-gem 'jbuilder', '~> 2.5'
-
-# Use Rack CORS for handling Cross-Origin Resource Sharing (CORS), making cross-origin AJAX possible
+gem 'puma', '~> 3.11'
+gem 'rack-attack'
 gem 'rack-cors'
+gem 'rails', '~> 6.0.0.rc1'
+gem 'rails-i18n', '~> 6.0.0.beta1'
+gem 'rolify'
+gem 'tzinfo-data'
+gem 'unicorn'
 
 group :development, :test do
-  gem 'database_cleaner'
-  gem 'rspec-rails'
-  gem 'pry'
-  gem 'irbtools', require: 'irbtools/binding'
-  gem 'factory_bot_rails'
-  gem 'faker'
-  gem 'shoulda-matchers'
-  gem 'guard-rspec'
-  gem 'zeus'
-  gem 'rails-erd'
-  gem 'rails-controller-testing'
-end
-
-group :test do
-  gem 'launchy'
+  gem 'byebug'
 end
 
 group :development do
-  gem 'listen', '~> 3.1.5'
-  gem 'capistrano-rails'
   gem 'capistrano-bundler'
+  gem 'capistrano-rails'
   gem 'capistrano-rbenv'
   gem 'capistrano3-unicorn'
+  gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'rubocop-performance', require: false
 end

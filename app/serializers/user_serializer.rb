@@ -1,7 +1,13 @@
-class UserSerializer < ActiveModel::Serializer
-  attributes :id, :email, :first_name, :last_name, :locale, :profile_picture
+class UserSerializer
+  include FastJsonapi::ObjectSerializer
 
-  has_many :workflows
-  has_many :jobs
-  has_one :card_grid
+  attributes :id, :first_name, :last_name, :email, :locale, :confirmed_at
+
+  attribute :full_name do |object|
+    "#{object.first_name} #{object.last_name}"
+  end
+
+  attribute :roles do |object|
+    object.roles.map(&:name)
+  end
 end
