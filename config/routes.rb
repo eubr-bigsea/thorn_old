@@ -15,6 +15,7 @@ Rails.application.routes.draw do
   end
   scope :administration, defaults: { format: :json } do
     resources :projects
+    resources :teams
     resources :users do
       member do
         post :confirm

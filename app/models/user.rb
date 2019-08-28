@@ -15,6 +15,8 @@ class User < ApplicationRecord
   validates :last_name, presence: true, length: { maximum: 30 }
 
   searchable_by :first_name, :last_name, :email
+  has_and_belongs_to_many :teams
+  has_many :projects, through: :teams
 
   def full_name
     "#{first_name} #{last_name}"
@@ -23,5 +25,9 @@ class User < ApplicationRecord
   def send_unlock_instructions
     raw = {}
     send_devise_notification(:unlock_instructions, raw, {})
+  end
+
+  def role_of?(role)
+    roles.where(name: role).length.positive?
   end
 end
