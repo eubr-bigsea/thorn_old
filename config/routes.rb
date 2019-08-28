@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     resources :tokens, only: :create
   end
   scope :administration, defaults: { format: :json } do
+    resources :projects
     resources :users do
       member do
         post :confirm
