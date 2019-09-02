@@ -7,6 +7,7 @@ gem 'cancancan'
 gem 'devise'
 gem 'devise-jwt', '~> 0.5.9'
 gem 'fast_jsonapi'
+gem 'has_scope'
 gem 'kaminari'
 gem 'mysql2'
 gem 'net-ldap'
@@ -22,6 +23,8 @@ gem 'unicorn'
 
 group :development, :test do
   gem 'byebug'
+  gem 'factory_bot_rails'
+  gem 'faker'
 end
 
 group :development do

@@ -1,9 +1,11 @@
 class UsersController < ApplicationController
   load_and_authorize_resource
   before_action :set_user, only: %i[confirm show update destroy]
+  has_scope :search_by
+  has_scope :sorted_by
 
   def index
-    @users = User.all
+    @users = apply_scopes(User).all
 
     paginate @users, UserSerializer
   end
