@@ -4,6 +4,7 @@ class ApplicationController < ActionController::API
   include JsonapiErrors # ALIAS JE
 
   rescue_from ::StandardError, with: ->(e) { 
+    byebug
     handle_error(e) }
   rescue_from CanCan::AccessDenied do |_e|
     error = Errors::Unauthorized.new(message: 'You don\'t has access level to this action.')

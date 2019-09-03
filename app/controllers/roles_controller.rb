@@ -1,4 +1,6 @@
 class RolesController < ApplicationController
+  load_and_authorize_resource
+
   before_action :set_role, only: %i[show update destroy]
 
   def index
@@ -7,30 +9,31 @@ class RolesController < ApplicationController
     render json: @roles
   end
 
-  def show
-    render json: @role
+  def add_admin
+    @user = User.find(admin_params)
+    @user.add_role :admin
+
+    render json: UserSerializer.new(@user), status: :created
   end
 
-  def create
-    @role = Role.new(role_params)
-
-    if @role.save
-      render json: @role, status: :created, location: @role
-    else
-      render json: @role.errors, status: :unprocessable_entity
-    end
-    end
-
-  def update
-    if @role.update(role_params)
-      render json: @role
-    else
-      render json: @role.errors, status: :unprocessable_entity
-    end
+  def add_manager
+    'a'
   end
 
-  def destroy
-    @role.destroy
+  def add_monitor
+    'a'
+  end
+
+  def remove_admin
+    'a'
+  end
+
+  def remove_manager
+    'a'
+  end
+
+  def remove_monitor
+    'a'
   end
 
   private
@@ -39,7 +42,7 @@ class RolesController < ApplicationController
     @role = Role.find(params[:id])
   end
 
-  def role_params
-    params.fetch(:role, {})
+  def admin_params
+    params.require(:role).permit(:user_id)[:user_id]
   end
 end

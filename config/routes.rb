@@ -14,6 +14,14 @@ Rails.application.routes.draw do
     resources :tokens, only: :create
   end
   scope :administration, defaults: { format: :json } do
+    resources :roles, only: :index do
+      post 'add_admin', to: 'roles#add_admin', as: 'add_admin', on: :collection
+      post 'add_manager', to: 'roles#add_manager', as: 'add_manager', on: :collection
+      post 'add_monitor', to: 'roles#add_monitor', as: 'add_monitor', on: :collection
+      post 'remove_admin', to: 'roles#remove_admin', as: 'remove_admin', on: :collection
+      post 'remove_manager', to: 'roles#remove_manager', as: 'remove_manager', on: :collection
+      post 'remove_monitor', to: 'roles#remove_monitor', as: 'remove_monitor', on: :collection
+    end
     resources :projects
     resources :teams
     resources :users do

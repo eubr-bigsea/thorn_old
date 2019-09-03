@@ -4,6 +4,6 @@ class Team < ApplicationRecord
   belongs_to :project
   has_and_belongs_to_many :users
 
-  validates :name, uniqueness: true
+  validates :name, uniqueness: { scope: :project_id, case_sensitive: false }
   validates :name, presence: true
 end

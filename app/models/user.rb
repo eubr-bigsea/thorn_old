@@ -18,6 +18,8 @@ class User < ApplicationRecord
   has_and_belongs_to_many :teams
   has_many :projects, through: :teams
 
+  before_create :skip_confirmation_notification!
+
   def full_name
     "#{first_name} #{last_name}"
   end

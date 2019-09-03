@@ -22,9 +22,9 @@ class TeamsController < ApplicationController
   def create
     @team = Team.create!(team_params)
 
-    managers_ids&.each do |manager_id|
-      manager = User.find_by(id: manager_id)
-      manager&.add_role :manager, @team
+    monitors_ids&.each do |monitor_id|
+      monitor = User.find_by(id: monitor_id)
+      monitor&.add_role :monitor, @team
     end
 
     render json: TeamSerializer.new(@team)
@@ -34,9 +34,9 @@ class TeamsController < ApplicationController
     @team.update!(team_params)
     @team.roles.destroy_all
 
-    managers_ids&.each do |manager_id|
-      manager = User.find_by(id: manager_id)
-      manager&.add_role :manager, @team
+    monitors_ids&.each do |monitor_id|
+      monitor = User.find_by(id: monitor_id)
+      monitor&.add_role :monitor, @team
     end
 
     render json: TeamSerializer.new(@team)
@@ -56,7 +56,7 @@ class TeamsController < ApplicationController
     params.require(:team).permit(:name, :description, :category, :subcategory)
   end
 
-  def managers_ids
-    params.require(:team).permit(managers_ids: [])[:managers_ids]
+  def monitors_ids
+    params.require(:team).permit(monitors_ids: [])[:monitors_ids]
   end
 end
