@@ -6,10 +6,10 @@ class TeamsController < ApplicationController
     @teams = if current_user.is_admin?
                Team.all
              elsif current_user.role_of? :manager
-               projects = current_user.roles.where(name: :manager).map(&:resource)
+               projects = current_user.managed_projects
                Team.where(id: projects.map { |p| p.teams.to_a }.flatten.map(&:id))
              else
-               current_user.teams
+               current_user.monitored_teams
              end
 
     paginate @teams, TeamSerializer
@@ -46,10 +46,28 @@ class TeamsController < ApplicationController
     @team.destroy
   end
 
+  def all_users
+    @users = @team.users
+
+    paginate @users, UserSerializer
+  end
+
+  def add_user
+    @team.users << @user
+  end
+
+  def remove_user
+    @team.users.delete(@user)
+  end
+
   private
 
   def set_team
     @team = Team.find(params[:id])
+  end
+
+  def set_user
+    @user = User.find(params[:user_id])
   end
 
   def team_params

@@ -1,6 +1,12 @@
 class RolesAbility < BaseAbility
   def initialize(user, _params)
-    can :add_admin, Role if user.is_admin?
-    can :me, :all
+    can :index, :all
+
+    if user.is_admin?
+      can :manage, :all
+    elsif user.is_manager?
+      can :add_monitor, Role
+      can :remove_monitor
+    end
   end
 end

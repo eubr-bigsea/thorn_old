@@ -1,4 +1,5 @@
 class User < ApplicationRecord
+  rolify after_add: :make_relation, after_remove: :remove_relation
   include Devise::JWT::RevocationStrategies::Whitelist
   include Searchable
   include Sortable
@@ -15,8 +16,11 @@ class User < ApplicationRecord
   validates :last_name, presence: true, length: { maximum: 30 }
 
   searchable_by :first_name, :last_name, :email
+  has_and_belongs_to_many :monitored_teams, join_table: :monitors_teams,
+                          foreign_key: :monitor_id, association_foreign_key: :team_id, class_name: 'Team'
+  has_and_belongs_to_many :managed_projects, join_table: :managers_projects, foreign_key: :manager_id,
+                          association_foreign_key: :project_id, class_name: 'Project'
   has_and_belongs_to_many :teams
-  has_many :projects, through: :teams
 
   before_create :skip_confirmation_notification!
 
@@ -31,5 +35,26 @@ class User < ApplicationRecord
 
   def role_of?(role)
     roles.where(name: role).length.positive?
+  end
+
+  protected
+
+  def make_relation(role)
+    if role.name == 'manager'
+      managed_projects << role.resource
+    elsif role.name == 'monitor'
+      monitored_teams << role.resource
+      teams << role.resource
+    end
+    true
+  end
+
+  def remove_relation(role)
+    if role.name == 'manager'
+      managed_projects.delete(role.resource)
+    elsif role.name == 'team'
+      monitored_teams.delete(role.resource)
+    end
+    true
   end
 end

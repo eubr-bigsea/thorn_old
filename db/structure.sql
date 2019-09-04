@@ -33,6 +33,34 @@ CREATE TABLE `jobs` (
   CONSTRAINT `fk_rails_df6238c8a6` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `managers_projects`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `managers_projects` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `manager_id` int(11) NOT NULL,
+  `project_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_managers_projects_on_manager_id` (`manager_id`),
+  KEY `index_managers_projects_on_project_id` (`project_id`),
+  CONSTRAINT `fk_rails_4f57bd99e0` FOREIGN KEY (`manager_id`) REFERENCES `users` (`id`),
+  CONSTRAINT `fk_rails_9a7d357b96` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `monitors_teams`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `monitors_teams` (
+  `id` bigint(20) NOT NULL AUTO_INCREMENT,
+  `monitor_id` int(11) NOT NULL,
+  `team_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `index_monitors_teams_on_monitor_id` (`monitor_id`),
+  KEY `index_monitors_teams_on_team_id` (`team_id`),
+  CONSTRAINT `fk_rails_599f4a1352` FOREIGN KEY (`team_id`) REFERENCES `teams` (`id`),
+  CONSTRAINT `fk_rails_ab51a1f6f6` FOREIGN KEY (`monitor_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `projects`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -46,7 +74,7 @@ CREATE TABLE `projects` (
   `updated_at` datetime(6) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_projects_on_name` (`name`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=83 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `roles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -62,7 +90,7 @@ CREATE TABLE `roles` (
   KEY `index_roles_on_resource_type_and_resource_id` (`resource_type`,`resource_id`),
   KEY `index_roles_on_name` (`name`),
   KEY `index_roles_on_name_and_resource_type_and_resource_id` (`name`,`resource_type`,`resource_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `schema_migrations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -85,7 +113,7 @@ CREATE TABLE `teams` (
   PRIMARY KEY (`id`),
   KEY `index_teams_on_project_id` (`project_id`),
   CONSTRAINT `fk_rails_36b1cba921` FOREIGN KEY (`project_id`) REFERENCES `projects` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=209 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `teams_users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -123,7 +151,7 @@ CREATE TABLE `users` (
   PRIMARY KEY (`id`),
   UNIQUE KEY `index_users_on_email` (`email`),
   UNIQUE KEY `index_users_on_reset_password_token` (`reset_password_token`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=105 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `users_roles`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -149,7 +177,7 @@ CREATE TABLE `whitelisted_jwts` (
   UNIQUE KEY `index_whitelisted_jwts_on_jti` (`jti`),
   KEY `index_whitelisted_jwts_on_user_id` (`user_id`),
   CONSTRAINT `fk_rails_fb288e0065` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `workflows`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
@@ -195,6 +223,8 @@ INSERT INTO `schema_migrations` (version) VALUES
 ('20190807143203'),
 ('20190822124651'),
 ('20190828121916'),
-('20190828122516');
+('20190828122516'),
+('20190904212705'),
+('20190904214034');
 
 
