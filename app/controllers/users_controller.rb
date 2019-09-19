@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   load_and_authorize_resource
   before_action :set_user, only: %i[confirm show update destroy]
   has_scope :search_by
-  has_scope :sorted_by
+  has_scope :sorted_by, default: '{"confirmed_at":"asc"}'
 
   def index
     @users = apply_scopes(User).all
@@ -18,6 +18,8 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     @user.skip_confirmation_notification!
     @user.save!
+
+    @user.add_role(:admin) if admin_role_param
 
     render json: UserSerializer.new(@user), status: :created
   end
@@ -51,5 +53,9 @@ class UsersController < ApplicationController
 
   def user_params
     params.require(:user).permit(:email, :password, :first_name, :last_name, :locale)
+  end
+
+  def admin_role_param
+    params[:user][:admin]
   end
 end
