@@ -1,7 +1,7 @@
 class TeamSerializer
   include FastJsonapi::ObjectSerializer
 
-  attributes :id, :name
+  attributes :id, :name, :description
 
   attribute :project do |object|
     {
@@ -16,6 +16,17 @@ class TeamSerializer
         id:        leader.id,
         full_name: leader.full_name,
         email:     leader.email
+      }
+    end
+  end
+
+  attribute :users do |object|
+    object.users.map do |user|
+      {
+        id:           user.id,
+        full_name:    user.full_name,
+        email:        user.email,
+        confirmed_at: user.confirmed_at
       }
     end
   end
