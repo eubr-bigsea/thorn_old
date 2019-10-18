@@ -49,7 +49,7 @@ Rails.application.configure do
     password:             ENV['EMAIL_PROVIDER_PASSWORD'] || Rails.application.secrets.email_provider_password
   }
   # ActionMailer Config
-  config.action_mailer.default_url_options = { host: 'localhost:4200' }
+  config.action_mailer.default_url_options = { host: 'http://localhost:8080' }
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.raise_delivery_errors = true
   # Send email in development mode?

@@ -1,0 +1,8 @@
+<p><%= t('.greeting', recipient: @resource.email) %></p>
+<p><%= t('.instruction') %></p>
+<p><%= t('.instruction_2') %></p>
+<a href=<%= Rails.application.config.action_mailer.default_url_options[:host] %> >
+    <%= Rails.application.config.action_mailer.default_url_options[:host] %>
+</a>
+<br>
+<p><%= t('.instruction_3') %></p>

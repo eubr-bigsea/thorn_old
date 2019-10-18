@@ -35,6 +35,25 @@ en:
       instruction_2: "If you didn't request this, please ignore this email."
       instruction_3: "Your password won't change until you access the link above and create a new one."
       subject: 'Reset password instructions'
+    confirmation_instructions:
+      action: 'Create account confirmation'
+      greeting: 'Hello %{recipient}!'
+      instruction: 'Your account at lemonade was successfully created. '
+      instruction_2: 'Our team is analising your profile and soon as possible you will recive another email that grant your access at the platform.'
+      instruction_3: "If you didn't request this, please ignore this email."
+      subject: 'You are almost there!'
+    unlock_instructions:
+      action: 'Account Unlocked'
+      greeting: 'Hello %{recipient}!'
+      instruction: 'Your access to Lemonade application was granted!'
+      instruction_2: 'You can login in at:'
+      instruction_3: "Enjoy!"
+      subject: 'Registration confirmed'
+    user_registration_notification:
+      greeting: 'Hello %{recipient}!'
+      instruction: 'A new user %{user} just register at Lemonade'
+      instruction_2: 'Please login in and confirm the registration at:'
+      subject: 'A new user registration'
   activerecord:
     errors:
       models:

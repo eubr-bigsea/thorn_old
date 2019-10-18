@@ -5,7 +5,6 @@ class User < ApplicationRecord
 
   rolify
 
-
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
          :confirmable, :jwt_authenticatable, jwt_revocation_strategy: self
@@ -19,5 +18,10 @@ class User < ApplicationRecord
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  def send_unlock_instructions
+    raw = {}
+    send_devise_notification(:unlock_instructions, raw, {})
   end
 end

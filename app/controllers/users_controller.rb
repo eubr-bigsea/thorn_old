@@ -34,6 +34,7 @@ class UsersController < ApplicationController
 
   def confirm
     @user.confirm
+    @user.send_unlock_instructions
 
     render json: UserSerializer.new(@user)
   end
