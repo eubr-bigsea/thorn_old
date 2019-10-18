@@ -35,6 +35,25 @@ pt:
       instruction_2: 'Se você não solicitou a mudança, por favor ignore este email.'
       instruction_3: 'Sua senha não mudará até você acessar o link acima e criar uma nova senha.'
       subject: 'Instruções de recuperação de senha.'
+    confirmation_instructions:
+      action: 'Confirmaçao de criação de conta'
+      greeting: 'Olá %{recipient}!'
+      instruction: 'Sua conta no Lemonade foi criada com sucesso.'
+      instruction_2: 'Nosso time está analisando seu perfil e logo mais você terá acesso a nossa ferramenta.'
+      instruction_3: 'Se você não criou uma conta no Lemonade, por favor ignore esse e-mail.'
+      subject: 'Você está quase lá!'
+    unlock_instructions:
+      action: 'Conta liberada'
+      greeting: 'Olá %{recipient}!'
+      instruction: 'Sua conta no Lemonade foi aprovada.'
+      instruction_2: 'Você pode entrar na ferramenta no link:'
+      instruction_3: 'Aproveite.'
+      subject: 'Cadastro aprovado!'
+    user_registration_notification:
+      greeting: 'Olá %{recipient}!'
+      instruction: 'Um novo usuário %{user} acabou de se registrar no Lemonade'
+      instruction_2: 'Por favor, acesse a ferramenta e confirme o usuário em:'
+      subject: 'Cadastro de novo usuário'
   activerecord:
     errors:
       models:

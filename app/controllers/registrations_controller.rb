@@ -2,11 +2,14 @@ class RegistrationsController < Devise::RegistrationsController
   # POST /resource
   def create
     build_resource(sign_up_params)
-    resource.skip_confirmation_notification!
 
     resource.save
+
     yield resource if block_given?
     if resource.persisted?
+
+      NotifyAdminsNewUserJob.perform_later(resource)
+
       if resource.active_for_authentication?
         set_flash_message! :notice, :signed_up
         sign_up(resource_name, resource)
