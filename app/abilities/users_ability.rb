@@ -8,5 +8,6 @@ class UsersAbility < BaseAbility
     end
 
     can :me, :all
+    can :available, :all
   end
 end

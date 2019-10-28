@@ -7,6 +7,7 @@ Rails.application.routes.draw do
 
     resources :users, only: %i[] do
       collection do
+        get :available
         get :me
       end
     end

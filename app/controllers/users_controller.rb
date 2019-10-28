@@ -14,6 +14,10 @@ class UsersController < ApplicationController
     paginate @users, UserSerializer
   end
 
+  def available
+    render json: UserAvailableSerializer.new(apply_scopes(User).all)
+  end
+
   def show
     render json: UserSerializer.new(@user)
   end
