@@ -17,22 +17,14 @@ class RolesController < ApplicationController
 
   def add_manager
     @user = User.find(user_params)
-    @project = Project.find(project_params)
-    @user.add_role :manager, @project
+    @user.add_role :manager
 
     render json: UserSerializer.new(@user), status: :created
   end
 
   def add_monitor
     @user = User.find(user_params)
-    @team = if current_user.is_admin?
-              Team.find(team_params)
-            else
-              project_ids = current_user.managed_projects.map(&:id)
-              Team.find_by!(project_id: project_ids, id: team_params)
-            end
-
-    @user.add_role :monitor, @team
+    @user.add_role :monitor
 
     render json: UserSerializer.new(@user), status: :created
   end
@@ -44,14 +36,12 @@ class RolesController < ApplicationController
 
   def remove_manager
     @user = User.find(user_params)
-    @project = Project.find(project_params)
-    @user.remove_role :manager, @project
+    @user.remove_role :manager
   end
 
   def remove_monitor
     @user = User.find(user_params)
-    @team = Team.find(team_params)
-    @user.remove_role :monitor, @team
+    @user.remove_role :monitor
   end
 
   private

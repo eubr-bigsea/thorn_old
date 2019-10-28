@@ -1,6 +1,6 @@
 class TeamsController < ApplicationController
   load_and_authorize_resource
-  before_action :set_team, only: %i[show update destroy]
+  before_action :set_team, only: %i[show update destroy add_monitor remove_monitor]
 
   def index
     @teams = if current_user.is_admin?
@@ -44,6 +44,18 @@ class TeamsController < ApplicationController
 
   def destroy
     @team.destroy
+  end
+
+  def add_monitor
+    @user = User.find(user_params)
+    @user.add_role :monitor, @team
+
+    render json: UserSerializer.new(@user), status: :created
+  end
+
+  def remove_monitor
+    @user = User.find(user_params)
+    @user.remove_role :monitor, @team
   end
 
   def all_users

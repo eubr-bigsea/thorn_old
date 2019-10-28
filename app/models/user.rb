@@ -23,6 +23,7 @@ class User < ApplicationRecord
   has_and_belongs_to_many :teams
 
   before_create :skip_confirmation_notification!
+  attr_accessor :skip_password_validation
 
   def full_name
     "#{first_name} #{last_name}"
@@ -38,6 +39,12 @@ class User < ApplicationRecord
   end
 
   protected
+
+  def password_required?
+    return false if skip_password_validation
+
+    super
+  end
 
   def make_relation(role)
     if role.name == 'manager'

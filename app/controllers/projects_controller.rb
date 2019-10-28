@@ -1,6 +1,6 @@
 class ProjectsController < ApplicationController
   load_and_authorize_resource
-  before_action :set_project, only: %i[show update destroy]
+  before_action :set_project, only: %i[show update destroy add_manager remove_manager]
 
   def index
     @projects = if current_user.is_admin?
@@ -41,6 +41,18 @@ class ProjectsController < ApplicationController
 
   def destroy
     @project.destroy
+  end
+
+  def add_manager
+    @user = User.find(user_params)
+    @user.add_role :manager, @project
+
+    render json: UserSerializer.new(@user), status: :created
+  end
+
+  def remove_manager
+    @user = User.find(user_params)
+    @user.remove_role :manager, @project
   end
 
   private

@@ -22,8 +22,17 @@ Rails.application.routes.draw do
       post 'remove_manager', to: 'roles#remove_manager', as: 'remove_manager', on: :collection
       post 'remove_monitor', to: 'roles#remove_monitor', as: 'remove_monitor', on: :collection
     end
-    resources :projects
-    resources :teams
+
+    resources :projects do
+      post 'add_manager', to: 'projects#add_manager', as: 'add_manager', on: :member
+      post 'remove_manager', to: 'projects#remove_manager', as: 'remove_manager', on: :member
+    end
+
+    resources :teams do
+      post 'add_monitor', to: 'teams#add_monitor', as: 'add_monitor', on: :member
+      post 'remove_monitor', to: 'teams#remove_monitor', as: 'remove_monitor', on: :member
+    end
+
     resources :users do
       member do
         post :confirm
