@@ -1,45 +1,60 @@
 class RolesController < ApplicationController
-  before_action :set_role, only: %i[show update destroy]
+  load_and_authorize_resource
+  skip_before_action :authenticate_user!, only: [:index]
 
   def index
-    @roles = Role.all
+    @roles = %i[admin manager monitor]
 
-    render json: @roles
+    render json: { roles: @roles }
   end
 
-  def show
-    render json: @role
+  def add_admin
+    @user = User.find(user_params)
+    @user.add_role :admin
+
+    render json: UserSerializer.new(@user), status: :created
   end
 
-  def create
-    @role = Role.new(role_params)
+  def add_manager
+    @user = User.find(user_params)
+    @user.add_role :manager
 
-    if @role.save
-      render json: @role, status: :created, location: @role
-    else
-      render json: @role.errors, status: :unprocessable_entity
-    end
-    end
-
-  def update
-    if @role.update(role_params)
-      render json: @role
-    else
-      render json: @role.errors, status: :unprocessable_entity
-    end
+    render json: UserSerializer.new(@user), status: :created
   end
 
-  def destroy
-    @role.destroy
+  def add_monitor
+    @user = User.find(user_params)
+    @user.add_role :monitor
+
+    render json: UserSerializer.new(@user), status: :created
+  end
+
+  def remove_admin
+    @user = User.find(user_params)
+    @user.remove_role :admin
+  end
+
+  def remove_manager
+    @user = User.find(user_params)
+    @user.remove_role :manager
+  end
+
+  def remove_monitor
+    @user = User.find(user_params)
+    @user.remove_role :monitor
   end
 
   private
 
-  def set_role
-    @role = Role.find(params[:id])
+  def user_params
+    params.require(:role).permit(:user_id)[:user_id]
   end
 
-  def role_params
-    params.fetch(:role, {})
+  def project_params
+    params.require(:role).permit(:project_id)[:project_id]
+  end
+
+  def team_params
+    params.require(:role).permit(:team_id)[:team_id]
   end
 end
