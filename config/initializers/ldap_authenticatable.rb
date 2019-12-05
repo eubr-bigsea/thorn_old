@@ -30,7 +30,7 @@ module Devise
 
           success!(user)
         rescue Net::LDAP::Error
-          return
+          nil
         end
       end
 

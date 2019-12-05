@@ -52,7 +52,8 @@ en:
     user_registration_notification:
       greeting: 'Hello %{recipient}!'
       instruction: 'A new user %{user} just register at Lemonade'
-      instruction_2: 'Please login in and confirm the registration at:'
+      instruction_2: 'The motive is:'
+      instruction_3: 'Please login in and confirm the registration at:'
       subject: 'A new user registration'
   activerecord:
     errors:

@@ -52,7 +52,8 @@ pt:
     user_registration_notification:
       greeting: 'Olá %{recipient}!'
       instruction: 'Um novo usuário %{user} acabou de se registrar no Lemonade'
-      instruction_2: 'Por favor, acesse a ferramenta e confirme o usuário em:'
+      instruction_2: 'A justificativa é:'
+      instruction_3: 'Por favor, acesse a ferramenta e confirme o usuário em:'
       subject: 'Cadastro de novo usuário'
   activerecord:
     errors:
