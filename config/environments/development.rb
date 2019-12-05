@@ -39,15 +39,17 @@ Rails.application.configure do
   # Highlight code that triggered database queries in logs.
   config.active_record.verbose_query_logs = true
 
-  config.action_mailer.smtp_settings = {
-    address:              'smtp.gmail.com',
-    port:                 587,
-    domain:               '200.131.6.43',
-    authentication:       'plain',
-    enable_starttls_auto: true,
-    user_name:            ENV['EMAIL_PROVIDER_USERNAME'] || Rails.application.secrets.email_provider_username,
-    password:             ENV['EMAIL_PROVIDER_PASSWORD'] || Rails.application.secrets.email_provider_password
-  }
+  # config.action_mailer.smtp_settings = {
+  #   address:              'smtp.gmail.com',
+  #   port:                 587,
+  #   domain:               '200.131.6.43',
+  #   authentication:       'plain',
+  #   enable_starttls_auto: true,
+  #   user_name:            ENV['EMAIL_PROVIDER_USERNAME'] || Rails.application.secrets.email_provider_username,
+  #   password:             ENV['EMAIL_PROVIDER_PASSWORD'] || Rails.application.secrets.email_provider_password
+  # }
+
+  config.action_mailer.smtp_settings = { address: '127.0.0.1', port: 1025 }
   # ActionMailer Config
   config.action_mailer.default_url_options = { host: 'http://localhost:8080' }
   config.action_mailer.delivery_method = :smtp

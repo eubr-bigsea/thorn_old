@@ -10,7 +10,7 @@ AllCops:
   Exclude:
     - 'db/structure.sql'
 
-Layout/AlignHash:
+Layout/HashAlignment:
   EnforcedColonStyle: table
 
 Metrics/AbcSize:
